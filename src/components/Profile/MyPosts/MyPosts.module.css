@@ -1,3 +1,6 @@
 .item{
-    color: greenyellow;
+    color: Black;
+}
+.item img{
+    width: 10%;
 }

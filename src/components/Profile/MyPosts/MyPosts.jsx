@@ -8,8 +8,8 @@ return  <div>My posts
                 <button>ADD POST</button>
             </div>
             <div className={classes.posts}>
-                <Post message='Hi, how are you?'/>
-                <Post message="It's my first post"/>
+                <Post message='Hi, how are you?' likeCount='30' />
+                <Post message="It's my first post" likeCount='30' />
             </div>
         </div>
 

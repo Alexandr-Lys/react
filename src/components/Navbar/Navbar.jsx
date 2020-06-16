@@ -4,20 +4,20 @@ import {NavLink} from "react-router-dom";
 
 const Navbar = () =>{
 return  <nav className={classes.nav}>
-        <div className={`${classes.item} ${classes.active}`}>
-            <NavLink to="/Profile">Profile</NavLink>
+        <div className={classes.item}>
+            <NavLink to="/Profile" activeClassName={classes.active}>Profile</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to="/Dialogs">Dialogs</NavLink>
+            <NavLink to="/Dialogs" activeClassName={classes.active}>Dialogs</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to="/News">News</NavLink>
+            <NavLink to="/News" activeClassName={classes.active}>News</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to="/Music">Music</NavLink>
+            <NavLink to="/Music" activeClassName={classes.active}>Music</NavLink>
         </div>
         <div className={classes.item}>
-            <NavLink to="/settings">Settings</NavLink>
+            <NavLink to="/settings" activeClassName={classes.active}>Settings</NavLink>
         </div>
         </nav>
 }

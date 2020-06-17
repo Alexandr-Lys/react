@@ -1,6 +1,6 @@
-.item{
-    color: Black;
+.postBlock{
+    padding: 20px;
 }
-.item img{
-    width: 10%;
+.posts{
+    margin-top: 20px;
 }

@@ -7,7 +7,7 @@ import Dialogs from './components/Dialogs/Dialogs.jsx';
 import News from './components/News/News.jsx';
 import Settings from './components/Settings/Settings.jsx';
 import Music from './components/Music/Music.jsx';
-import MyPosts from './components/Profile//MyPosts/MyPosts.jsx';
+import MyPosts from './components/Profile/MyPosts/MyPosts.jsx';
 import {BrowserRouter, Route} from "react-router-dom";
 
 const App = (props) => {
@@ -17,10 +17,12 @@ const App = (props) => {
        <Header />
        <Navbar />
        <div className='app-wrapper-content'>
-            <Route path='/dialogs'  render = {() => <Dialogs state={props.state.dialogsPage}/>} />
+            <Route path='/dialogs'  render = {() => <Dialogs
+                state={props.state.dialogsPage}
+                dispatch={props.dispatch}/>} />
             <Route path='/profile'  render = {() => <Profile
-            profilePage={props.state.profilePage}
-            dispatch={props.dispatch}/>}/>
+                profilePage={props.state.profilePage}
+                dispatch={props.dispatch}/>}/>
             <Route path='/news'     render = {News} />
             <Route path='/music'    render = {Music} />
             <Route path='/settings' render = {Settings} />

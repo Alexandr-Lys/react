@@ -23,10 +23,11 @@ let store = {
             {id:2, name: 'Masha'},
             {id:3, name: 'Asya'},
             ],
-        sidebar:[],
+
 
             newMessageBody: ''
-        }
+        },
+        sidebar:{},
     },
     _callSubscriber () {
      console.log('wow');

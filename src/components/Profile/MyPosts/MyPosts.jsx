@@ -6,23 +6,19 @@ import {addPostActionCreator, updateNewPostActionCreator} from '../../../redux/p
 
 const MyPosts = (props) => {
     let newPostElement = React.createRef();
-
-    let addPost = () => {
-        props.dispatch(addPostActionCreator());
+    let postsElement =
+        props.posts.map (p => <Post message = {p.message} likeCount = {p.likeCount}/> );
+    let onAddPost = () => {
+        props.addPost();
     };
-
-    let postsElement = props.posts.map (p => <Post message = {p.message} likeCount = {p.likeCount}/> );
-
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        let action = {type: 'UPDATE-NEW-POST-TEXT', newText: text};
-        props.dispatch(action);
+        props.updateNewPostText(text);
     };
-
 return  <div className={classes.postBlock}><h3>My posts</h3>
             <div>
                 <textarea onChange={onPostChange} ref={newPostElement} value={props.newPostText} />
-                <div><button onClick={addPost}>ADD POST</button></div>
+                <div><button onClick={onAddPost}>ADD POST</button></div>
             </div>
             <div className={classes.posts}>
 				{postsElement}

@@ -5,21 +5,16 @@ import classes from './Dialogs.module.css';
 import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
 
 const Dialogs = (props) =>{
-let state = props.store.getState().dialogsPage;
-
-let messagesElements = state.messages.map(m => <MessageItem message={m.message} id={m.id}/>);
-let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
-
+	let state = props.dialogsPage;
+	let messagesElements = state.messages.map(m => <MessageItem message={m.message} key={m.id} id={m.id}/>);
+	let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>);
 	let newMessageBody = state.newMessageBody;
-
-
-
 	let onSendMessageClick = () => {
-		props.dispatch(sendMessageCreator());
+		props.sendMessage();
 	};
-	let onMessageChange = (e) => {
+	let onNewMessageChange = (e) => {
 		let body = e.target.value;
-		props.store.dispatch(updateNewMessageBodyCreator(body));
+		props.updateNewMessageBody(body);
 	};
 	return (
 		<div className={classes.dialogs}>
@@ -31,7 +26,7 @@ let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}
 			<div className={classes.dialogsMessages}>
 				<div>{messagesElements}</div>
 				<div>
-					<textarea placeholder='ENTER YOUR MESSAGE' onChange={onMessageChange}  value={newMessageBody}></textarea>
+					<textarea placeholder='ENTER YOUR MESSAGE' onChange={onNewMessageChange}  value={newMessageBody}></textarea>
 					<div><button onClick={onSendMessageClick}>Send</button></div>
 				</div>
 			</div>

@@ -11,6 +11,9 @@ return  <nav className={classes.nav}>
             <NavLink to="/Dialogs" activeClassName={classes.active}>Dialogs</NavLink>
         </div>
         <div className={classes.item}>
+            <NavLink to="/Users" activeClassName={classes.active}>Users</NavLink>
+        </div>
+        <div className={classes.item}>
             <NavLink to="/News" activeClassName={classes.active}>News</NavLink>
         </div>
         <div className={classes.item}>

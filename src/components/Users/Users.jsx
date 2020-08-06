@@ -1,49 +1,61 @@
 import React from 'react';
 import styles from './users.module.css';
+import * as axios from "axios";
+import userPhoto from '../../assets/img/user.png'
 
-let Users = (props) => {
-    if (props.users.length === 0){
-    props.setUsers([
-        {id: 0, photoUrl: 'https://cdna.artstation.com/p/assets/images/images/003/630/638/20161006165157/smaller_square/dmitry-kremiansky-combined.jpg?1475790718',
-            followed: false, fullName:'Dimitry', status:'am a boss', location: {city: 'Minsk', country: 'Belarus'}},
-        {id: 1, photoUrl: 'https://cdna.artstation.com/p/assets/images/images/003/630/638/20161006165157/smaller_square/dmitry-kremiansky-combined.jpg?1475790718',
-            followed: true,fullName:'Eva', status:'am a girl', location: {city: 'Moscow', country: 'Russia'}},
-        {id: 2, photoUrl: 'https://cdna.artstation.com/p/assets/images/images/003/630/638/20161006165157/smaller_square/dmitry-kremiansky-combined.jpg?1475790718',
-            followed: false,fullName:'Liza', status:'be cool', location: {city: 'Kiev', country: 'Ukraine'}},
-        {id: 3, photoUrl: 'https://cdna.artstation.com/p/assets/images/images/003/630/638/20161006165157/smaller_square/dmitry-kremiansky-combined.jpg?1475790718',
-            followed: true,fullName:'Kolya', status:'hello world!', location: {city: 'Rall', country: 'Gucchi'}}
-        ]);}
+class Users extends React.Component {
+    componentDidMount() {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                this.props.setUsers(response.data.items)
+            });
+    }
+    render() {
 
-    return <div>
-        {
-            props.users.map( u => <div key = {u.id}>
+        let pagesCount = this.props.totalUsersCount/this.props.pageSize;
+
+        let pages = [];
+        for(let i=1; i <= pagesCount; i++){
+            pages.push(i);
+        }
+
+        return <div>
+            <div>
+                {pages.map(p => {
+                    return <span className={this.props.currentPage === p && styles.selectedPage}>{p}</span>})}
+            </div>
+            {
+                this.props.users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src = {u.photoUrl} className = {styles.userPhoto}/>
+                            <img src={u.photos.small != null ? u.photos.small : userPhoto}
+                                 className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick = {() => {props.unfollow(u.id)}}>unfollow</button>
-                                : <button onClick = {() => {props.follow(u.id)}}>follow</button>}
+                                ? <button onClick={() => {
+                                    this.props.unfollow(u.id)
+                                }}>unfollow</button>
+                                : <button onClick={() => {
+                                    this.props.follow(u.id)
+                                }}>follow</button>}
                         </div>
                     </span>
-                    <span>
                         <span>
-                            <div>{u.fullName}</div>
+                        <span>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{"u.location.country"}</div>
+                            <div>{"u.location.city"}</div>
                         </span>
                     </span>
-                </div>
+                    </div>
+                )
+            }
 
-
-            )
-        }
-
-    </div>
+        </div>
+    }
 }
-
-export default Users;
+export default Users
